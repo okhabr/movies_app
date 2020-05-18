@@ -38,6 +38,11 @@ export const movieReducer = (state = initialState, action: any) => {
         film: action.payload,
         loading: false,
       }
+    case movieTypes.CLEAR:
+      return {
+        ...state,
+        film: starterMovie
+      }
     case movieTypes.ERROR:
       return {
         ...state,

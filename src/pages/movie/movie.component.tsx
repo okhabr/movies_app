@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { requestMovieDetails } from 'store/movie/actions'
+import { requestMovieDetails, clearMovie } from 'store/movie/actions'
 import { requestSimilarMovies } from 'store/similar-movies/actions'
 import { RootStore } from 'store/store.models'
 import { MovieDetails } from 'shared/models'
@@ -43,7 +43,11 @@ export const Movie: React.FC = () => {
   useEffect(() => {
     dispatch(requestMovieDetails(id))
     dispatch(requestSimilarMovies(id))
-  }, [dispatch, id])
+    return function cleanup() {
+      dispatch(clearMovie());
+      console.log('UNMOUNTS');
+    } 
+  }, [])
 
   return (
     <div className={style.movie__container}>

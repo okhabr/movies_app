@@ -8,6 +8,12 @@ export const toggleLoading = () => {
   }
 }
 
+export const clearMovie = () => {
+  return {
+    type: movieTypes.CLEAR,
+  }
+}
+
 export const requestMovieDetails = (id: number) => async (dispatch: any) => {
   try {
     dispatch(toggleLoading())
