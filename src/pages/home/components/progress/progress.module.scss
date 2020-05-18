@@ -1,0 +1,19 @@
+@import '../../../../shared/colors';
+%dot {
+    height: 20px;
+    width: 20px;
+    background-color: $lightGray;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 10px;
+    border: 1px solid $orangeLight;
+}
+.dot {
+    &_active {
+        @extend %dot;
+        background-color: $orangeLight;
+    }
+    &_passive {
+        @extend %dot;
+    }
+}

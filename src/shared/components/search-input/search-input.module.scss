@@ -1,0 +1,37 @@
+@import '../../../shared/colors';
+
+.search {
+    &__glass {
+        font-size: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $lightBlue; 
+    
+        &:hover {
+            cursor: pointer;
+            & .search__input {
+                display: block;
+                animation: grow 1s;
+            }
+        }
+    }  
+
+    &__input {
+        border: none;
+        border-bottom: 2px solid $lightBlue;
+        padding: 4px;
+        outline: none;
+        color: $lightBlue;
+        display: none;
+        width: 100px;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+@keyframes grow {
+    from {width: 0px;}
+    to {width: 100px}
+}

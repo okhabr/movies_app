@@ -1,0 +1,22 @@
+@import '../../../shared/colors';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 24px;
+    border-bottom: .5px solid gray;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    &__link {
+        text-decoration: none;
+        margin-left: 50px;
+        color: $mediumBlue; 
+    }
+}

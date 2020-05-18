@@ -1,0 +1,63 @@
+@import '../../colors';
+
+.movie {
+    &__card {
+        width: 240px;
+        border-radius: 8px;
+    }
+
+    &__info {
+        display: none;
+        color: $lightGray;
+        padding: 24px;
+    }
+
+    &__title {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 21px;
+    }
+    &__details {
+        display: flex;
+        justify-content: space-between;
+
+        span:first-child {
+            font-weight: 600;
+        }
+    }
+    &__genre {
+        padding: 2px 8px;
+        background-color: $lightGray;
+        color: $mediumBlue;
+        display: inline-block;
+        margin: 4px;
+        margin-left: 0;
+        border-radius: 10px;
+    }
+
+    &__container {
+        position: relative;
+        margin-bottom: 24px;
+        
+        &:hover .movie__info {
+            display: block;
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: $darkBlue;
+            border-radius: 8px;
+            cursor: pointer;
+            animation: flip 2s;
+        }
+
+        &:hover .movie__card {
+            animation: flip 2s;
+        }
+    }
+}
+
+@keyframes flip {
+    from {transform: rotateY(180deg)}
+    to {transform: rotateY(0);}
+}

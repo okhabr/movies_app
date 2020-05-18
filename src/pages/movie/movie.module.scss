@@ -1,0 +1,80 @@
+@import '../../shared/colors';
+
+%spacing {
+    margin-bottom: 24px;
+}
+
+.movie {
+    &__container {
+        margin: 24px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    &__content {
+        margin-left: 48px;
+    }
+
+    &__sectionWrapper {
+        @extend %spacing;
+    }
+
+    &__poster{
+        width: 300px;
+        border-radius: 8px;
+    }
+
+    &__header {
+        font-size: 32px;
+        text-align: center;
+        color: $darkBlue;
+        @extend %spacing;
+
+        &_secondary {
+            font-size: 21px;
+            color: $lightBlue;
+            font-weight: 600;
+            display: flex;
+            align-items: flex-end;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__genre {
+        padding: 8px 12px;
+        background: $mediumBlue;
+        display: inline-block;
+        font-size: 18px;
+        color: $lightGray;
+        font-weight: 500;
+        border-radius: 15px;
+        margin-right: 6px;
+        margin-top: 6px;
+    }
+
+    &__tagline {
+        font-size: 24px;
+        text-align: center;
+        color: $darkBlue;
+        @extend %spacing;
+    }
+
+    &__description {
+        font-size: 18px;
+        @extend %spacing;
+    }
+
+    &__backBtn {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+}
+
+.similar {
+    width: 150px;
+}

@@ -1,0 +1,16 @@
+@import '../../../../shared/colors';
+.btn {
+    background-color: $lightBlue;
+    padding: 10px;
+    color: $lightGray;
+    text-decoration: none;
+    display: inline-block;
+    margin: 24px 0;
+    border-radius: 12px;
+    font-size: 18px;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

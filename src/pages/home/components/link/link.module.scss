@@ -1,0 +1,17 @@
+@import '../../../../shared/colors';
+
+.link {
+    display: block;
+    text-decoration: none;
+    width: 200px;
+    font-size: 21px;
+    padding: 10px;
+    background-color: $orangeLight;
+    color: $darkBlue;
+    text-align: center;
+    border-radius: 12px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
