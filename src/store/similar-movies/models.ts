@@ -1,6 +1,6 @@
-import {SearchedMovie} from 'shared/models';
+import { SearchedMovie } from 'shared/models'
 export interface SimilarMoviesReducer {
-    films: SearchedMovie[];
-    loading: boolean;
-    error: string
+  films: SearchedMovie[];
+  loading: boolean;
+  error: string;
 }

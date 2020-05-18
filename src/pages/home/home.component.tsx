@@ -11,9 +11,9 @@ export const Home: React.FC = () => {
     const images = [img1,img2,img3];
     const descriptions = ['Best movies to watch with friends & much more....', 'Perfect movie for a romantic date', 'Good movies to enjoy it on your own']
 
-    const handleProgressClick = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-        const element = event.target as HTMLSpanElement;
-        setCurrent(Number.parseInt(element.id));
+    const handleProgressClick = (event: React.MouseEvent) => {
+        const elementId = event.currentTarget.id;
+        setCurrent(Number.parseInt(elementId));
     }
 
     const handleClick = () => {
