@@ -10,8 +10,8 @@ export const Header: React.FC = () => {
             <Logo/>
             <div className={style.menu}>
                 <SearchInput/>
-                <Link to='' className={style.menu__link}>Register</Link>
-                <Link to='' className={style.menu__link}>Login</Link>
+                <Link to="" className={style.menu__link}>Register</Link>
+                <Link to="" className={style.menu__link}>Login</Link>
             </div>
         </div>
     )

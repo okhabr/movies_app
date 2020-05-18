@@ -24,7 +24,7 @@ export const SearchForm: React.FC = () => {
         const searchedMovie:string = history.location.pathname.split('/')[2];
         dispatch(requestMovies(searchedMovie));
         setValue(searchedMovie);
-    },[])
+    },[dispatch, history.location.pathname])
 
     return (
         <div className={style.form__container}>

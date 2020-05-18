@@ -39,7 +39,7 @@ export const Movie: React.FC = () => {
     useEffect(() => {
         dispatch(requestMovieDetails(id))
         dispatch(requestSimilarMovies(id))
-    }, [id])
+    }, [dispatch, id])
 
     return (
         <div className={style.movie__container}>
