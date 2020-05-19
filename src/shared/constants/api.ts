@@ -9,6 +9,8 @@ export const movieDetailsAPI = (id: number) =>
 export const getSimilar = (id: number) =>
   `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=7238931a9385a7e423e1a7ac5d2d8ec6&language=en-US&page=1`
 
+export const getTop = `https://api.themoviedb.org/3/movie/top_rated?api_key=7238931a9385a7e423e1a7ac5d2d8ec6&language=en-US&page=1`;
+
 //DETAILS ABOUT MOVIE BY ID
 // https://developers.themoviedb.org/3/movies/get-movie-details
 

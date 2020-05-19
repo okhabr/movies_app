@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { requestMovies } from 'store/search/actions'
+import { requestMovies, requestTopMovies } from 'store/search/actions'
+import { GetTopTwenty } from '../top-twenty/top-twenty.component';
 import style from './search-form.module.scss'
 
 import { ROUTES } from 'shared/constants/routes'
@@ -11,20 +12,36 @@ export const SearchForm: React.FC = () => {
   const dispatch = useDispatch()
   let history = useHistory()
 
-  const [value, setValue] = useState<string>('')
+  const [keyword, setKeyword] = useState<string>('')
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setValue(e.target.value)
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value)
+  }
+    
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(requestMovies(value))
-    history.push(ROUTES.SEARCH.route(value))
+    dispatch(requestMovies(keyword))
+    history.push(ROUTES.SEARCH.route('keyword', keyword))
+  }
+
+  const handleGetTop = () => {
+    dispatch(requestTopMovies());
+    history.push(ROUTES.SEARCH.route('top'))
   }
 
   useEffect(() => {
-    const searchedMovie: string = history.location.pathname.split('/')[2]
-    dispatch(requestMovies(searchedMovie))
-    setValue(searchedMovie)
+    const searchType: string = history.location.pathname.split('/')[2];
+    switch(searchType) {
+      case 'top':
+        dispatch(requestTopMovies());
+        setKeyword('');
+        break;
+      case 'keyWord':
+        const searchedMovie: string = history.location.pathname.split('-')[1] 
+        dispatch(requestMovies(searchedMovie))
+        setKeyword(searchedMovie)
+        break;
+    }
   }, [dispatch, history.location.pathname])
 
   return (
@@ -36,7 +53,7 @@ export const SearchForm: React.FC = () => {
             className={style.form__input}
             type="text"
             onChange={handleInput}
-            value={value}
+            value={keyword}
           />
           <button className={style.form__submit} type="submit">
             Search
@@ -46,7 +63,7 @@ export const SearchForm: React.FC = () => {
       </div>
       <div className={style.flex__container}>
         <img className={style.form__pic} src={img} />
-        <button className={style.form__getTop}>Get top 20</button>
+        <GetTopTwenty handleClick={handleGetTop}/>
       </div>
     </div>
   )

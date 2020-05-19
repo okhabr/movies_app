@@ -44,10 +44,10 @@ export const Movie: React.FC = () => {
     dispatch(requestMovieDetails(id))
     dispatch(requestSimilarMovies(id))
     return function cleanup() {
-      dispatch(clearMovie());
-      console.log('UNMOUNTS');
-    } 
-  }, [])
+      dispatch(clearMovie())
+      console.log('UNMOUNTS')
+    }
+  }, [dispatch, id])
 
   return (
     <div className={style.movie__container}>

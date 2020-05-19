@@ -41,7 +41,7 @@ export const movieReducer = (state = initialState, action: any) => {
     case movieTypes.CLEAR:
       return {
         ...state,
-        film: starterMovie
+        film: starterMovie,
       }
     case movieTypes.ERROR:
       return {
