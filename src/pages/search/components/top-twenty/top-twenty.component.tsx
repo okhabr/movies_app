@@ -14,6 +14,6 @@ export const GetTopTwenty: React.FC<GetTopTwentyProps> = (props) => {
   return (
     <button className={style.getTop} onClick={props.handleClick}>
       Get top 20
-      </button>
+    </button>
   )
 }

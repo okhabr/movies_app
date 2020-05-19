@@ -25,6 +25,11 @@ export const searchReducer = (state = initialState, action: any) => {
         error: action.payload,
         loading: false,
       }
+    case searchTypes.CLEAR:
+      return {
+        ...state,
+        films: [],
+      }
     default:
       return state
   }

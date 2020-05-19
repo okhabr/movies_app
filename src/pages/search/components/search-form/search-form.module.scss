@@ -55,6 +55,14 @@
         @extend %button;
         background: $lightBlue;
     }
+    &__clear {
+        @extend %button;
+        background: $red;
+        font-size: 18px;
+        font-weight: 700;
+        padding: 5px;
+        display: inline-flex;
+    }
     &__pic {
         max-width: 400px;
     }

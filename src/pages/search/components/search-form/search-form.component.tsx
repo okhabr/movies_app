@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { requestMovies, requestTopMovies } from 'store/search/actions'
-import { GetTopTwenty } from '../top-twenty/top-twenty.component';
+import { requestMovies, requestTopMovies, clearMovies } from 'store/search/actions'
+import { GetTopTwenty } from '../top-twenty/top-twenty.component'
 import style from './search-form.module.scss'
 
 import { ROUTES } from 'shared/constants/routes'
@@ -17,7 +17,7 @@ export const SearchForm: React.FC = () => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value)
   }
-    
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(requestMovies(keyword))
@@ -25,22 +25,28 @@ export const SearchForm: React.FC = () => {
   }
 
   const handleGetTop = () => {
-    dispatch(requestTopMovies());
+    dispatch(requestTopMovies())
     history.push(ROUTES.SEARCH.route('top'))
   }
 
+  const handleClear = () => {
+    setKeyword('');
+    dispatch(clearMovies());
+    history.push(ROUTES.SEARCH.route('keyword'));
+  }
+
   useEffect(() => {
-    const searchType: string = history.location.pathname.split('/')[2];
-    switch(searchType) {
+    const searchType: string = history.location.pathname.split('/')[2].split('-')[0];
+    switch (searchType) {
       case 'top':
-        dispatch(requestTopMovies());
-        setKeyword('');
-        break;
-      case 'keyWord':
-        const searchedMovie: string = history.location.pathname.split('-')[1] 
+        dispatch(requestTopMovies())
+        setKeyword('')
+        break
+      case 'keyword':
+        const searchedMovie: string = history.location.pathname.split('-')[1]
         dispatch(requestMovies(searchedMovie))
         setKeyword(searchedMovie)
-        break;
+        break
     }
   }, [dispatch, history.location.pathname])
 
@@ -55,6 +61,11 @@ export const SearchForm: React.FC = () => {
             onChange={handleInput}
             value={keyword}
           />
+          {keyword && (
+            <button className={style.form__clear} onClick={handleClear}>
+              <span className="material-icons">clear</span>
+            </button>
+          )}
           <button className={style.form__submit} type="submit">
             Search
           </button>
@@ -63,7 +74,7 @@ export const SearchForm: React.FC = () => {
       </div>
       <div className={style.flex__container}>
         <img className={style.form__pic} src={img} />
-        <GetTopTwenty handleClick={handleGetTop}/>
+        <GetTopTwenty handleClick={handleGetTop} />
       </div>
     </div>
   )

@@ -12,9 +12,9 @@ export const SearchInput: React.FC = () => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }
-    
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    history.push(ROUTES.SEARCH.route('keyword',value))
+    history.push(ROUTES.SEARCH.route('keyword', value))
   }
 
   return (

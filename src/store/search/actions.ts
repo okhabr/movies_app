@@ -8,6 +8,12 @@ export const toggleLoading = () => {
   }
 }
 
+export const clearMovies = () => {
+  return {
+    type: searchTypes.CLEAR,
+  }
+}
+
 export const requestMovies = (keyWord: string) => async (dispatch: any) => {
   try {
     dispatch(toggleLoading())
@@ -33,7 +39,7 @@ export const requestMovies = (keyWord: string) => async (dispatch: any) => {
 export const requestTopMovies = () => async (dispatch: any) => {
   try {
     dispatch(toggleLoading())
-    const res = await fetch(getTop);
+    const res = await fetch(getTop)
     const results = await res.json()
     const movie: SearchedMovie[] = await results.results
     const movies: SearchedMovie[] = movie.map((item) => ({

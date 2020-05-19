@@ -5,13 +5,13 @@ export const ROUTES = {
     route: (queryType: string, value: string = '') => {
       // types keyWord, filter, top
       if (queryType === 'keyword') {
-        return `/search/${queryType}-${value}`;
+        return `/search/${queryType}-${value}`
       }
-      if (queryType === 'top'){
-        return `/search/${queryType}`;
-      } 
-      return `/search/${queryType}`;
-    }
+      if (queryType === 'top') {
+        return `/search/${queryType}`
+      }
+      return `/search/${queryType}`
+    },
   },
   MOVIE: {
     path: '/movie/:id',
