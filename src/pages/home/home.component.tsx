@@ -7,7 +7,7 @@ import img3 from 'assets/Landing3.png'
 
 export const Home: React.FC = () => {
   const [current, setCurrent] = useState<number>(0)
-  const images = [img1, img2, img3]
+  const images = [img3, img2, img1]
   const descriptions = [
     'Best movies to watch with friends & much more....',
     'Perfect movie for a romantic date',
@@ -32,7 +32,7 @@ export const Home: React.FC = () => {
         }
         return current + 1
       })
-    }, 5000)
+    }, 2000)
     return () => clearInterval(timer)
   }, [])
 

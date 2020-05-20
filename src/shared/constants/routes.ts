@@ -1,7 +1,7 @@
 export const ROUTES = {
   HOME: '/',
   SEARCH: {
-    path: '/search/:queryType?',
+    path: '/search/:queryType',
     route: (queryType: string, value: string = '') => {
       // types keyWord, filter, top
       if (queryType === 'keyword') {

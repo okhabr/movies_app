@@ -1,0 +1,62 @@
+@import '../../../../shared/colors';
+%button {
+    padding: 5px 20px;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    color: $darkBlue;
+    margin: 10px;
+    color: $lightGray;
+    
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.form {
+    &__name {
+        color: $darkBlue;
+        font-size: 21px;
+        font-weight: 500;
+        text-align: center;
+        display: block;
+        margin: 12px 0;
+    }
+    &__input {
+        color: $darkBlue;
+        background-color: $lightGray;
+        outline: none;
+        border: none;
+        border-radius: 8px;
+        width: 400px;
+        font-size: 21px;
+        font-weight: 500;
+        padding: 5px 10px;
+        font-size: 16px;
+    }
+    &__submit {
+        @extend %button;
+        background: $mediumBlue;
+    }
+    &__showFilters {
+        @extend %button;
+        background: $orangeDark;
+    }
+    &__getTop {
+        @extend %button;
+        background: $lightBlue;
+    }
+    &__clear {
+        @extend %button;
+        background: $red;
+        font-size: 18px;
+        font-weight: 700;
+        padding: 5px;
+        display: inline-flex;
+    }
+    &__pic {
+        max-width: 400px;
+    }
+}
+
