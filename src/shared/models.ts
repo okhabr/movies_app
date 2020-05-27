@@ -35,3 +35,10 @@ export interface MovieDetails {
   poster_path: string;
   backdrop_path: string;
 }
+
+
+export interface FilterValues {
+  excludeAdult: boolean;
+  genres: string[],
+  year: number
+}

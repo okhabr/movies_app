@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react'
+import React from 'react'
 import style from './additional-info.module.scss'
 
 interface AdditionalInfo {

@@ -1,4 +1,5 @@
-@import '../../../../shared/colors';
+@import '../../../../../../shared/colors';
+
 %button {
     padding: 5px 20px;
     border-radius: 8px;
@@ -15,6 +16,14 @@
 }
 
 .form {
+    &__container{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 24px;
+        border: 2px solid $mediumBlue;
+        border-radius: 10px;
+        padding: 24px;
+    }
     &__name {
         color: $darkBlue;
         font-size: 21px;
@@ -39,14 +48,6 @@
         @extend %button;
         background: $mediumBlue;
     }
-    &__showFilters {
-        @extend %button;
-        background: $orangeDark;
-    }
-    &__getTop {
-        @extend %button;
-        background: $lightBlue;
-    }
     &__clear {
         @extend %button;
         background: $red;
@@ -55,8 +56,4 @@
         padding: 5px;
         display: inline-flex;
     }
-    &__pic {
-        max-width: 400px;
-    }
 }
-

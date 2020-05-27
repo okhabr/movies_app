@@ -1,34 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { requestMovieDetails, clearMovie } from 'store/movie/actions'
 import { requestSimilarMovies } from 'store/similar-movies/actions'
 import { RootStore } from 'store/store.models'
 import { MovieDetails } from 'shared/models'
-import { Genre } from 'shared/constants/genres'
 
 import { AdditinalInfo } from './components/additional-info/additional-info.component'
 import { BackBtn } from './components/back-btn/back-btn.component'
-import { MovieCards } from './components/movie-cards/movie-cards.component'
+import {MovieGenres} from './components/movie-genres/movie-genres.component'
+import { SimilarMovies } from './components/similar-movies/similar-movies.component'
 
 import style from './movie.module.scss'
 
 export const Movie: React.FC = () => {
   const dispatch = useDispatch()
-  const { id } = useParams()
-
-  const [arrow, setArrow] = useState<string>('down')
+  const { id } = useParams()  
 
   const film: MovieDetails = useSelector(
     (state: RootStore) => state.filmDetails.film
   )
-
-  const genres: Genre[] = film.genres
-  const movieGenres = genres.map((genre) => (
-    <span className={style.movie__genre}>{genre.name}</span>
-  ))
-
-  const changeArrow = () => (arrow === 'up' ? setArrow('down') : setArrow('up'))
 
   const additionalInfo = {
     Rate: film.vote_average,
@@ -45,9 +36,8 @@ export const Movie: React.FC = () => {
     dispatch(requestSimilarMovies(id))
     return function cleanup() {
       dispatch(clearMovie())
-      console.log('UNMOUNTS')
     }
-  }, [dispatch, id])
+  }, [])
 
   return (
     <div className={style.movie__container}>
@@ -62,25 +52,10 @@ export const Movie: React.FC = () => {
         <h2 className={style.movie__header}>{film.title}</h2>
         <h3 className={style.movie__tagline}>{film.tagline}</h3>
         <p className={style.movie__description}>{film.overview}</p>
-
-        <section className={style.movie__sectionWrapper}>
-          <h6 className={style.movie__header_secondary}>Genres</h6>
-          {movieGenres}
-        </section>
-
-        <AdditinalInfo data={additionalInfo} />
-
-        <section>
-          <h6 className={style.movie__header_secondary} onClick={changeArrow}>
-            <span>Similar movies</span>
-            <span className="material-icons">{`keyboard_arrow_${arrow}`}</span>
-          </h6>
-          <MovieCards open={arrow === `up`} />
-        </section>
-
-        <div className={style.movie__backBtn}>
-          <BackBtn />
-        </div>
+        <AdditinalInfo data={additionalInfo} />             
+        <MovieGenres genres={film.genres}/>
+        <SimilarMovies/> 
+        <BackBtn />
       </div>
     </div>
   )

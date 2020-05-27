@@ -46,6 +46,7 @@ export const Home: React.FC = () => {
           src={images[0]}
           className={style.home__pic}
           onClick={handleClick}
+          alt="Movie"
         />
       </div>
       <div className={current === 1 ? style.visible : style.invisible}>
@@ -55,6 +56,7 @@ export const Home: React.FC = () => {
           src={images[1]}
           className={style.home__pic}
           onClick={handleClick}
+          alt="Movie"
         />
       </div>
       <div className={current === 2 ? style.visible : style.invisible}>
@@ -64,6 +66,7 @@ export const Home: React.FC = () => {
           src={images[2]}
           className={style.home__pic}
           onClick={handleClick}
+          alt="Movie"
         />
       </div>
       <div className={style.home__progress}>

@@ -1,0 +1,31 @@
+@import '../../../../shared/colors';
+
+.genres {
+    &__sectionWrapper{
+        margin-bottom: 24px;
+    }
+
+    &__header {
+        font-size: 21px;
+        color: $lightBlue;
+        font-weight: 600;
+        display: flex;
+        align-items: flex-end;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__item {
+        padding: 8px 12px;
+        background: $mediumBlue;
+        display: inline-block;
+        font-size: 18px;
+        color: $lightGray;
+        font-weight: 500;
+        border-radius: 15px;
+        margin-right: 6px;
+        margin-top: 6px;
+    }
+}

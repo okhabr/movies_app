@@ -44,18 +44,6 @@
         }
     }
 
-    &__genre {
-        padding: 8px 12px;
-        background: $mediumBlue;
-        display: inline-block;
-        font-size: 18px;
-        color: $lightGray;
-        font-weight: 500;
-        border-radius: 15px;
-        margin-right: 6px;
-        margin-top: 6px;
-    }
-
     &__tagline {
         font-size: 24px;
         text-align: center;
@@ -67,12 +55,6 @@
         font-size: 18px;
         @extend %spacing;
     }
-
-    &__backBtn {
-        display: flex;
-        justify-content: flex-end;
-    }
-
 }
 
 .similar {

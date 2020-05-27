@@ -1,100 +1,85 @@
 import React, { useState, useEffect } from 'react'
+import {FilterValues} from 'shared/models';
+
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import {
-  requestMovies,
-  requestTopMovies,
-  clearMovies,
-} from 'store/search/actions'
-import { GetTopTwenty } from '../top-twenty/top-twenty.component'
-import {FilterForm} from '../filter/filter.component';
+import { requestMovies, requestTopMovies, clearMovies, requestFilteredMovies} from 'store/search/actions'
+
+import { GetTopTwenty } from './components/top-twenty/top-twenty.component'
+import { FilterForm } from './components/filter/filter.component'
+import {KeywordForm} from './components/keyword/keyword.component'
+
 import style from './search-form.module.scss'
 
 import { ROUTES } from 'shared/constants/routes'
-import img from 'assets/Search.jpg'
 
 export const SearchForm: React.FC = () => {
   const dispatch = useDispatch()
   let history = useHistory()
 
-  const [keyword, setKeyword] = useState<string>('')
-  const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [buttonText, setButtonText] = useState<string>('Use filter');
+  const [showFilter, setShowFilter] = useState<boolean>(false)
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.target.value)
+  const handleKeyWordSubmit = (word:string) => { 
+    dispatch(requestMovies(word))
+    history.push(ROUTES.SEARCH.route('keyword', word))
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    dispatch(requestMovies(keyword))
-    history.push(ROUTES.SEARCH.route('keyword', keyword))
+  const handleFilterSubmit = (filterData:FilterValues) => { 
+    dispatch(requestFilteredMovies(filterData))
+    history.push(ROUTES.SEARCH.route('filter','',filterData))
   }
 
   const handleGetTop = () => {
     dispatch(requestTopMovies())
     history.push(ROUTES.SEARCH.route('top'))
+    setShowFilter(false);
   }
 
   const handleClear = () => {
-    setKeyword('')
     dispatch(clearMovies())
     history.push(ROUTES.SEARCH.route('keyword'))
   }
 
   const handleShowFilter = () => {
-    const text = showFilter ? 'Use filter' : 'Hide filter';
-    setButtonText(text);
-    setShowFilter(!showFilter);
+    setShowFilter(!showFilter)
+    handleClear();
   }
 
   useEffect(() => {
-    const searchType: string = history.location.pathname
-      .split('/')[2]
-      .split('-')[0]
+    const searchType: string = history.location.search.split('=')[0].replace('?','');
     switch (searchType) {
       case 'top':
         dispatch(requestTopMovies())
-        setKeyword('')
         break
       case 'keyword':
-        const searchedMovie: string = history.location.pathname.split('-')[1]
+        const searchedMovie: string = history.location.search.split('=')[1]
         dispatch(requestMovies(searchedMovie))
-        setKeyword(searchedMovie)
+        break
+      case 'filter':
+        const filterDataArray: string[] = history.location.search.split('&');
+        const filterData: FilterValues = {
+          year: Number.parseInt(filterDataArray[1].split('=')[1]),
+          genres: filterDataArray[2].split('=')[1].split(','),
+          excludeAdult:  !!filterDataArray[3].split('=')[1]
+        }
+        dispatch(requestFilteredMovies(filterData))
+        setShowFilter(true);
         break
     }
-  }, [dispatch, history.location.pathname])
-
+  }, [])
   return (
     <div className={style.form__container}>
       <div className={style.flex__container}>
         {!showFilter && (
-          <form onSubmit={handleSubmit}>
-          <label className={style.form__name}>Type your movie name here</label>
-          {keyword && (
-            <button className={style.form__clear} onClick={handleClear}>
-              <span className="material-icons">clear</span>
-            </button>
-          )}
-          <input
-            className={style.form__input}
-            type="text"
-            onChange={handleInput}
-            value={keyword}
-          />
-          <button className={style.form__submit} type="submit">
-            Search
-          </button>
-        </form>
+          <KeywordForm clear={handleClear} submit={handleKeyWordSubmit}/>
         )}
-        
-          <button className={style.form__showFilters} onClick={handleShowFilter}>{buttonText}</button>
-          {showFilter &&  <FilterForm/>}
+        {showFilter ? <FilterForm handleCancel={handleShowFilter} handleSubmit={handleFilterSubmit}/> : (
+          <button className={style.form__showFilters} onClick={handleShowFilter}>
+            Use filter
+          </button>
+        )}
       </div>
-      <div className={style.flex__container}>
-        <img className={style.form__pic} src={img} />
-        <GetTopTwenty handleClick={handleGetTop} />
-      </div>
+      <GetTopTwenty handleClick={handleGetTop} />
     </div>
   )
 }

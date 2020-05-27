@@ -18,8 +18,8 @@ function App() {
         <Header />
         <Switch>
           <Route exact path={ROUTES.HOME} component={Home} />
-          <Route exact path={ROUTES.SEARCH.path} component={Search} />
-          <Route exact path={ROUTES.MOVIE.path} component={Movie} />
+          <Route path={ROUTES.SEARCH.path} component={Search} />
+          <Route path={ROUTES.MOVIE.path} component={Movie} />
         </Switch>
       </Router>
     </Provider>

@@ -15,18 +15,19 @@ export const MovieCard: React.FC<movieCardProps> = (props) => {
   const movie = props.movie
   const genresNumbers = props.movie.genre_ids
   const genresObj = genres.filter((genre) => genresNumbers.includes(genre.id))
+  
   const genresNames = genresObj.map((genre) => (
-    <span className={style.movie__genre}>{genre.name}</span>
+    <span className={style.movie__genre} key={genre.id}>{genre.name}</span>
   ))
 
   return (
+    <li className={style.movie__scene}>
     <Link to={ROUTES.MOVIE.route(movie.id)}>
-      <li className={style.movie__scene}>
         <div className={style.movie__container}>
           <img
             src={movie.poster_path}
-            key={movie.id}
             className={style.movie__card}
+            alt="Movie poster"
           />
           <div className={style.movie__info}>
             <h3 className={style.movie__title}>{movie.title}</h3>
@@ -39,7 +40,7 @@ export const MovieCard: React.FC<movieCardProps> = (props) => {
             {genresNames}
           </div>
         </div>
-      </li>
     </Link>
+    </li>
   )
 }

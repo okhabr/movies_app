@@ -10,7 +10,7 @@ export const MovieCards: React.FC = () => {
   const moviesList: SearchedMovie[] = useSelector(
     (state: RootStore) => state.search.films
   )
-  const result = moviesList.map((movie) => <MovieCard movie={movie} />)
+  const result = moviesList.map((movie) => <MovieCard movie={movie} key={movie.id}/>)
   return (
     <div className={style.pageContainer}>
       <ul className={style.movies__container}>{result}</ul>
