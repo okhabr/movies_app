@@ -14,10 +14,9 @@ export const SearchInput: React.FC = () => {
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    
     history.push(ROUTES.SEARCH.route('keyword', value))
     e.preventDefault()
-    setValue('');
+    setValue('')
   }
 
   return (

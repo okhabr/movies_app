@@ -7,9 +7,9 @@ export const BackBtn: React.FC = () => {
   const handleClick = () => history.goBack()
   return (
     <div className={style.back__container}>
-    <button className={style.back__btn} onClick={handleClick}>
-      Back to search
-    </button>
+      <button className={style.back__btn} onClick={handleClick}>
+        Back to search
+      </button>
     </div>
   )
 }

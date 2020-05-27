@@ -1,10 +1,14 @@
 import { SearchReducer } from './models'
 import { searchTypes } from './types'
+import { act } from '@testing-library/react'
 
 const initialState: SearchReducer = {
   films: [],
   loading: false,
   error: '',
+  currentPage: 0,
+  totalPages: 0,
+  totalResult: null
 }
 export const searchReducer = (state = initialState, action: any) => {
   switch (action.type) {
@@ -14,10 +18,14 @@ export const searchReducer = (state = initialState, action: any) => {
         loading: true,
       }
     case searchTypes.SUCCESS:
+     const {films, currentPage, totalPages, totalResult } = action.payload;
       return {
         ...state,
-        films: action.payload,
         loading: false,
+        films, 
+        currentPage, 
+        totalPages, 
+        totalResult
       }
     case searchTypes.ERROR:
       return {

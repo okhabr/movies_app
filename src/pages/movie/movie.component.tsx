@@ -8,14 +8,14 @@ import { MovieDetails } from 'shared/models'
 
 import { AdditinalInfo } from './components/additional-info/additional-info.component'
 import { BackBtn } from './components/back-btn/back-btn.component'
-import {MovieGenres} from './components/movie-genres/movie-genres.component'
+import { MovieGenres } from './components/movie-genres/movie-genres.component'
 import { SimilarMovies } from './components/similar-movies/similar-movies.component'
 
 import style from './movie.module.scss'
 
 export const Movie: React.FC = () => {
   const dispatch = useDispatch()
-  const { id } = useParams()  
+  const { id } = useParams()
 
   const film: MovieDetails = useSelector(
     (state: RootStore) => state.filmDetails.film
@@ -37,7 +37,7 @@ export const Movie: React.FC = () => {
     return function cleanup() {
       dispatch(clearMovie())
     }
-  }, [])
+  }, [dispatch, id])
 
   return (
     <div className={style.movie__container}>
@@ -52,9 +52,9 @@ export const Movie: React.FC = () => {
         <h2 className={style.movie__header}>{film.title}</h2>
         <h3 className={style.movie__tagline}>{film.tagline}</h3>
         <p className={style.movie__description}>{film.overview}</p>
-        <AdditinalInfo data={additionalInfo} />             
-        <MovieGenres genres={film.genres}/>
-        <SimilarMovies/> 
+        <AdditinalInfo data={additionalInfo} />
+        <MovieGenres genres={film.genres} />
+        <SimilarMovies />
         <BackBtn />
       </div>
     </div>

@@ -36,9 +36,8 @@ export interface MovieDetails {
   backdrop_path: string;
 }
 
-
 export interface FilterValues {
   excludeAdult: boolean;
-  genres: string[],
-  year: number
+  genres: string[];
+  year: number;
 }

@@ -1,6 +1,6 @@
 import { searchTypes } from './types'
 import { SearchedMovie } from 'shared/models'
-import {FilterValues} from 'shared/models'
+import { FilterValues } from 'shared/models'
 import { api, getTop, filterMovies } from 'shared/constants/api'
 
 export const toggleLoading = () => {
@@ -20,14 +20,19 @@ export const requestMovies = (keyWord: string) => async (dispatch: any) => {
     dispatch(toggleLoading())
     const res = await fetch(`${api}${keyWord}`)
     const results = await res.json()
-    const movie: SearchedMovie[] = await results.results
-    const movies: SearchedMovie[] = movie.map((item) => ({
+    const moviesList: SearchedMovie[] = await results.results
+    const films: SearchedMovie[] = moviesList.map((item) => ({
       ...item,
       poster_path: `https://image.tmdb.org/t/p/w185/${item.poster_path}`,
     }))
     dispatch({
       type: searchTypes.SUCCESS,
-      payload: movies,
+      payload: {
+        films,
+        totalPages: results.total_pages,
+        currentPage: results.page,
+        totalResult: results.total_results
+      }
     })
   } catch (err) {
     dispatch({
@@ -37,21 +42,27 @@ export const requestMovies = (keyWord: string) => async (dispatch: any) => {
   }
 }
 
-export const requestFilteredMovies = (filterValues:FilterValues) => async (dispatch: any) => {
+export const requestFilteredMovies = (filterValues: FilterValues) => async (
+  dispatch: any
+) => {
   try {
     dispatch(toggleLoading())
     const res = await fetch(filterMovies(filterValues))
     const results = await res.json()
-    const movie: SearchedMovie[] = await results.results
-    const movies: SearchedMovie[] = movie.map((item) => ({
+    const moviesList: SearchedMovie[] = await results.results
+    const films: SearchedMovie[] = moviesList.map((item) => ({
       ...item,
       poster_path: `https://image.tmdb.org/t/p/w185/${item.poster_path}`,
     }))
-    console.log(filterMovies(filterValues));
     dispatch({
       type: searchTypes.SUCCESS,
-      payload: movies,
-    })    
+      payload: {
+        films,
+        totalPages: results.total_pages,
+        currentPage: results.page,
+        totalResult: results.total_results
+      }
+    })
   } catch (err) {
     dispatch({
       type: searchTypes.ERROR,
@@ -59,21 +70,25 @@ export const requestFilteredMovies = (filterValues:FilterValues) => async (dispa
     })
   }
 }
-
 
 export const requestTopMovies = () => async (dispatch: any) => {
   try {
     dispatch(toggleLoading())
     const res = await fetch(getTop)
     const results = await res.json()
-    const movie: SearchedMovie[] = await results.results
-    const movies: SearchedMovie[] = movie.map((item) => ({
+    const moviesList: SearchedMovie[] = await results.results
+    const films: SearchedMovie[] = moviesList.map((item) => ({
       ...item,
       poster_path: `https://image.tmdb.org/t/p/w185/${item.poster_path}`,
     }))
     dispatch({
       type: searchTypes.SUCCESS,
-      payload: movies,
+      payload: {
+        films,
+        totalPages: results.total_pages,
+        currentPage: results.page,
+        totalResult: results.total_results
+      }
     })
   } catch (err) {
     dispatch({

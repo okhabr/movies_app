@@ -11,7 +11,7 @@ export const GetTopTwenty: React.FC<GetTopTwentyProps> = (props) => {
     <div className={style.top__container}>
       <img className={style.top__pic} src={img} alt="People" />
       <button className={style.top__get} onClick={props.handleClick}>
-        Get top 20
+        Get top rated
       </button>
     </div>
   )
