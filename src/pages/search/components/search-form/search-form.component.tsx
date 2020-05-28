@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { FilterValues } from 'shared/models'
 
 import { useDispatch } from 'react-redux'
@@ -22,7 +22,9 @@ export const SearchForm: React.FC = () => {
   const dispatch = useDispatch()
   let history = useHistory()
 
-  const [showFilter, setShowFilter] = useState<boolean>(false)
+  const showFilterStarterValue = history.location.search.includes('filter');
+  
+  const [showFilter, setShowFilter] = useState<boolean>(showFilterStarterValue)
 
   const handleKeyWordSubmit = (word: string) => {
     dispatch(requestMovies(word))
@@ -50,30 +52,6 @@ export const SearchForm: React.FC = () => {
     handleClear()
   }
 
-  useEffect(() => {
-    const searchType: string = history.location.search
-      .split('=')[0]
-      .replace('?', '')
-    switch (searchType) {
-      case 'top':
-        dispatch(requestTopMovies())
-        break
-      case 'keyword':
-        const searchedMovie: string = history.location.search.split('=')[1]
-        dispatch(requestMovies(searchedMovie))
-        break
-      case 'filter':
-        const filterDataArray: string[] = history.location.search.split('&')
-        const filterData: FilterValues = {
-          year: Number.parseInt(filterDataArray[1].split('=')[1]),
-          genres: filterDataArray[2].split('=')[1].split(','),
-          excludeAdult: !!filterDataArray[3].split('=')[1],
-        }
-        dispatch(requestFilteredMovies(filterData))
-        setShowFilter(true)
-        break
-    }
-  }, [dispatch, history.location.search])
   return (
     <div className={style.form__container}>
       <div className={style.flex__container}>

@@ -1,0 +1,23 @@
+@import '../../../../../../shared/colors';
+
+.pagination {
+    &__container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__pages {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__controller {
+        border: none;
+        padding: 6px 12px;
+        margin: 3px;
+        background-color: white;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

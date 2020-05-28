@@ -1,0 +1,29 @@
+@import '../../../../../../../../shared/colors';
+
+%item {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    padding-top: 6px;
+    text-align: center;
+    vertical-align: center;
+    margin: 3px;
+    font-weight: 500;
+    font-size: 16px;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.item {
+
+    &_passive {
+        @extend %item;
+    }
+
+    &_active {
+        @extend %item;
+        background-color: $mediumBlue;
+        color: $lightGray
+    }
+}

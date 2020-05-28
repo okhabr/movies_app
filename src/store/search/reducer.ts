@@ -8,7 +8,8 @@ const initialState: SearchReducer = {
   error: '',
   currentPage: 0,
   totalPages: 0,
-  totalResult: null
+  totalResult: null,
+  url: ''
 }
 export const searchReducer = (state = initialState, action: any) => {
   switch (action.type) {
@@ -18,14 +19,15 @@ export const searchReducer = (state = initialState, action: any) => {
         loading: true,
       }
     case searchTypes.SUCCESS:
-     const {films, currentPage, totalPages, totalResult } = action.payload;
+      const { films, currentPage, totalPages, totalResult, url } = action.payload
       return {
         ...state,
         loading: false,
-        films, 
-        currentPage, 
-        totalPages, 
-        totalResult
+        films,
+        currentPage,
+        totalPages,
+        totalResult,
+        url
       }
     case searchTypes.ERROR:
       return {
@@ -34,10 +36,7 @@ export const searchReducer = (state = initialState, action: any) => {
         loading: false,
       }
     case searchTypes.CLEAR:
-      return {
-        ...state,
-        films: [],
-      }
+      return initialState;
     default:
       return state
   }
