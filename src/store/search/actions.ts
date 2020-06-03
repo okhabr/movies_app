@@ -18,7 +18,7 @@ export const clearMovies = () => {
 export const requestMovies = (keyWord: string) => async (dispatch: any) => {
   try {
     dispatch(toggleLoading())
-    const url = `${api}${keyWord}`; 
+    const url = `${api}${keyWord}`
     const res = await fetch(url)
     const results = await res.json()
     const moviesList: SearchedMovie[] = await results.results
@@ -78,7 +78,7 @@ export const requestFilteredMovies = (filterValues: FilterValues) => async (
 export const requestTopMovies = () => async (dispatch: any) => {
   try {
     dispatch(toggleLoading())
-    const url = getTop;
+    const url = getTop
     const res = await fetch(url)
     const results = await res.json()
     const moviesList: SearchedMovie[] = await results.results
@@ -104,7 +104,10 @@ export const requestTopMovies = () => async (dispatch: any) => {
   }
 }
 
-export const requestNextPage = (baseUrl: string, page:string|null = '1') => async (dispatch: any) => {
+export const requestNextPage = (
+  baseUrl: string,
+  page: string | null = '1'
+) => async (dispatch: any) => {
   try {
     dispatch(toggleLoading())
     const url = `${baseUrl}&page=${page}`

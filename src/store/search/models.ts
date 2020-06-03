@@ -6,5 +6,5 @@ export interface SearchReducer {
   currentPage: number;
   totalPages: number;
   totalResult: number | null;
-  url: string
+  url: string;
 }

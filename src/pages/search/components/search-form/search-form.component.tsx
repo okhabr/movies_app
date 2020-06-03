@@ -22,8 +22,8 @@ export const SearchForm: React.FC = () => {
   const dispatch = useDispatch()
   let history = useHistory()
 
-  const showFilterStarterValue = history.location.search.includes('filter');
-  
+  const showFilterStarterValue = history.location.search.includes('filter')
+
   const [showFilter, setShowFilter] = useState<boolean>(showFilterStarterValue)
 
   const handleKeyWordSubmit = (word: string) => {

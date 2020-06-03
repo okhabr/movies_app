@@ -1,11 +1,10 @@
-import React , {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import {
   requestMovies,
   requestTopMovies,
-  clearMovies,
   requestFilteredMovies,
 } from 'store/search/actions'
 import { SearchReducer } from 'store/search/models'
@@ -14,7 +13,7 @@ import { RootStore } from 'store/store.models'
 import style from './movie-cards.module.scss'
 
 import { MovieCard } from 'shared/components/movie-card/movie-card.component'
-import {Pagination} from './components/pagination/pagination.component';
+import { Pagination } from './components/pagination/pagination.component'
 
 export const MovieCards: React.FC = () => {
   const dispatch = useDispatch()
@@ -63,7 +62,7 @@ export const MovieCards: React.FC = () => {
         <h3 className={style.movies__message}>{userMessage}</h3>
       )}
       <ul className={style.movies__container}>{moviesList}</ul>
-      {!!moviesCount && <Pagination/>}
+      {!!moviesCount && <Pagination />}
     </div>
   )
 }
